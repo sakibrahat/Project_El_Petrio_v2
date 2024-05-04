@@ -16,8 +16,36 @@
     margin: 0;
     box-sizing: border-box;
 }
-body{
-    background-color: #080710;
+body {
+    background-color: #a579ed;
+    animation: rgbBreathing 50s infinite alternate; /* Even slower animation */
+}
+
+@keyframes rgbBreathing {
+    0% {
+        background-color: #ff0000; /* Red */
+    }
+    15% {
+        background-color: #ff8000; /* Orange */
+    }
+    30% {
+        background-color: #ffff00; /* Yellow */
+    }
+    45% {
+        background-color: #7ee0e3; /* Light Blue */
+    }
+    60% {
+        background-color: #00ff00; /* Green */
+    }
+    75% {
+        background-color: #00ffff; /* Cyan */
+    }
+    90% {
+        background-color: #0000ff; /* Blue */
+    }
+    100% {
+        background-color: #ff0000; /* Red */
+    }
 }
 .background{
     width: 430px;
