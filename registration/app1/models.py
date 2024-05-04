@@ -22,5 +22,17 @@ class Pet(models.Model):
 
     def __str__(self):
         return self.breed
+    
 
-# Create your models here.
+    #new code:
+
+
+    from django.db import models
+
+class PetAdd(models.Model):
+    name = models.CharField(max_length=100)
+    species = models.CharField(max_length=100)
+    age = models.IntegerField()
+    description = models.TextField()
+    price = models.DecimalField(max_digits=10, decimal_places=2)
+    available = models.BooleanField(default=True)

@@ -153,4 +153,44 @@ def pet_buying_page(request):
     return render(request, 'Buying.html', context)
 
 
+#new code:
 
+
+from django.shortcuts import render, redirect
+from .models import PetAdd
+
+def buy_pet(request):
+    pets = PetAdd.objects.filter(available=True)
+    if request.method == 'POST':
+        pet_id = request.POST.get('pet_id')
+        pet = PetAdd.objects.get(id=pet_id)
+        pet.available = False
+        pet.save()
+        return redirect('payment')
+    return render(request, 'buy.html', {'pets': pets})
+
+def payment(request):
+    if request.method == 'POST':
+        # Process payment logic goes here
+        return render(request, 'payment.html')
+    return redirect('buy_pet')
+
+def admin_add_pet(request):
+    if request.method == 'POST':
+        name = request.POST.get('name')
+        species = request.POST.get('species')
+        age = request.POST.get('age')
+        description = request.POST.get('description')
+        price = request.POST.get('price')
+        pet = PetAdd.objects.create(name=name, species=species, age=age, description=description, price=price)
+        return redirect('admin_panel')
+    return render(request, 'pets/admin_add_pet.html')
+
+def admin_panel(request):
+    pets = PetAdd.objects.all()
+    return render(request, 'pets/admin_panel.html', {'pets': pets})
+
+def admin_remove_pet(request, pet_id):
+    pet = PetAdd.objects.get(id=pet_id)
+    pet.delete()
+    return redirect('admin_panel')

@@ -17,6 +17,7 @@ from django.contrib import admin
 
 from django.urls import path
 from app1 import views
+from app1.views import buy_pet, payment, admin_add_pet, admin_panel, admin_remove_pet
 
 
 urlpatterns = [
@@ -31,6 +32,14 @@ urlpatterns = [
     path('Buying/', views.buying_page, name='Buying'),
     path('Buying/make_payment.html', views.make_payment, name='make_payment'),
     path('Adoption/', views.Adoption, name='Adoption'),
-    path('pricing/', views.pricing, name='pricing')
+    path('pricing/', views.pricing, name='pricing'),
+
+    #new code:
+
+    path('buy/', buy_pet, name='buy_pet'),
+    path('payment/', payment, name='payment'),
+    path('admin/add_pet/', admin_add_pet, name='admin_add_pet'),
+    path('admin/panel/', admin_panel, name='admin_panel'),
+    path('admin/remove_pet/<int:pet_id>/', admin_remove_pet, name='admin_remove_pet'),
 
 ]

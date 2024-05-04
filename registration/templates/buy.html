@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buy Pets</title>
+</head>
+<body>
+    <h1>Available Pets</h1>
+    <form method="post" action="{% url 'payment' %}">
+        {% csrf_token %}
+        {% for pet in pets %}
+            <div style="border: 1px solid #ccc; padding: 10px; margin-bottom: 10px;">
+                <input type="radio" name="pet_id" value="{{ pet.id }}"> 
+                <strong>{{ pet.name }}</strong><br>
+                <strong>Breed:</strong> {{ pet.species }}<br>
+                <strong>Age:</strong> {{ pet.age }}<br>
+                <strong>Description:</strong> {{ pet.description }}<br>
+                <strong>Price:</strong> ${{ pet.price }}<br>
+            </div>
+        {% endfor %}
+        <button type="submit">Proceed to Payment</button>
+    </form>
+</body>
+</html>
