@@ -192,10 +192,11 @@ def admin_add_pet(request):
     if request.method == 'POST':
         name = request.POST.get('name')
         species = request.POST.get('species')
+        breed= request.post.get('breed')
         age = request.POST.get('age')
         description = request.POST.get('description')
         price = request.POST.get('price')
-        pet = PetAdd.objects.create(name=name, species=species, age=age, description=description, price=price)
+        pet = PetAdd.objects.create(name=name, species=species, breed=breed, age=age, description=description, price=price)
         return redirect('admin_panel')
     return render(request, 'pets/admin_add_pet.html')
 

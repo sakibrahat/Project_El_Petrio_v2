@@ -7,7 +7,7 @@ from .models import PetAdd
 
 @admin.register(PetAdd)
 class PetAddAdmin(admin.ModelAdmin):
-    list_display = ('name', 'species', 'price', 'available', 'display_image')
+    list_display = ('name', 'species','breed' ,'price', 'available', 'display_image')
     list_filter = ('species', 'available')
     search_fields = ('name', 'species')
     actions = ['mark_as_sold', 'mark_as_available']
@@ -22,6 +22,6 @@ class PetAddAdmin(admin.ModelAdmin):
         return obj.image.url if obj.image else None
     display_image.short_description = 'Image' 
 
-admin.site.site_header = 'Pet Store Administration'
-admin.site.site_title = 'Pet Store Admin'
-admin.site.index_title = 'Welcome to the Pet Store Admin Panel'
+admin.site.site_header = 'El petrio Administration'
+admin.site.site_title = 'El petrio Admin'
+admin.site.index_title = 'Welcome El Petrio Admin Panel'
