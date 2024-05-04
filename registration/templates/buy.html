@@ -68,14 +68,28 @@
                 padding: 10px;
             }
         }
+        /* Add this CSS */
+.pet-image-container {
+    max-width: 100%;
+    height: auto;
+    overflow: hidden;
+    border-radius: 5px;
+}
+
+.pet-image {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
     </style>
 </head>
 <body>
     <h1>Available Pets</h1>
-    <form method="post" action="{% url 'buy_pet' %}">
+    <form method="post" action="{% url 'buy_pet' %}" id="purchaseForm" enctype="multipart/form-data">
         {% csrf_token %}
         {% for pet in pets %}
-        <div class="pet-item" "{% if not pet.available %}opacity: 0.5;{% endif %}">
+        <div class="pet-item" {% if not pet.available %}style="opacity: 0.5;"{% endif %}>
             <strong>{{ pet.name }}</strong> - {{ pet.species }} - ${{ pet.price }} 
             {% if pet.available %}
                 <span class="available">Available</span>
@@ -87,10 +101,24 @@
             <strong>Breed:</strong> {{ pet.breed }}<br>
             <strong>Age:</strong> {{ pet.age }}<br>
             <strong>Description:</strong> {{ pet.description }}<br>
+            <div class="pet-image-container">
+                {% if pet.image %}
+                    <img src="{{ pet.image.url }}" alt="{{ pet.name }}" class="pet-image">
+                {% endif %}
+            </div>
         </div>
-        
         {% endfor %}
+        <label for="pet_image">Upload Image:</label>
+        <input type="file" name="pet_image" id="pet_image">
         <button type="submit">Purchase</button>
     </form>
+
+    <script>
+        document.getElementById("purchaseForm").addEventListener("submit", function(event) {
+            event.preventDefault(); // Prevent form submission
+            alert("Your payment is done");
+            this.submit(); // Submit the form
+        });
+    </script>
 </body>
 </html>

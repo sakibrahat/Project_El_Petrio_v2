@@ -36,3 +36,22 @@ class PetAdd(models.Model):
     description = models.TextField()
     price = models.DecimalField(max_digits=10, decimal_places=2)
     available = models.BooleanField(default=True)
+    image = models.ImageField(upload_to='pet_images/', null=True, blank=True)
+    image_url = models.URLField(null=True, blank=True)
+
+
+def image(self):
+        if self.image_upload:
+            return self.image_upload.url
+        elif self.image_url:
+            return self.image_url
+        else:
+            return None
+
+def save(self, *args, **kwargs):
+        if self.image_url:
+            # If image URL is provided, clear the uploaded image
+            self.image = None
+        super().save(*args, **kwargs)
+
+       

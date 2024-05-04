@@ -18,6 +18,8 @@ from django.contrib import admin
 from django.urls import path
 from app1 import views
 from app1.views import buy_pet, payment, admin_add_pet, admin_panel, admin_remove_pet
+from django.conf.urls.static import static
+from django.conf import settings
 
 
 urlpatterns = [
@@ -43,3 +45,6 @@ urlpatterns = [
     path('admin/remove_pet/<int:pet_id>/', admin_remove_pet, name='admin_remove_pet'),
 
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
