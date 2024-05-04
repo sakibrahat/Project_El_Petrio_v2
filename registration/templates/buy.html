@@ -75,20 +75,20 @@
     <form method="post" action="{% url 'buy_pet' %}">
         {% csrf_token %}
         {% for pet in pets %}
-            <div class="pet-item" style="{% if not pet.available %} opacity: 0.5; {% endif %}">
-                <strong>{{ pet.name }}</strong> - {{ pet.species }} - ${{ pet.price }} 
-                {% if pet.available %}
-                    <span class="available">Available</span>
-                    <input type="radio" name="pet_id" value="{{ pet.id }}"> 
-                {% else %}
-                    <span class="sold">Sold</span>
-                {% endif %}
-                <br>
-                <strong>Breed:</strong> {{ pet.species }}<br>
-                <strong>Age:</strong> {{ pet.age }}<br>
-                <strong>Description:</strong> {{ pet.description }}<br>
-                <strong>Price:</strong> ${{ pet.price }}<br>
-            </div>
+        <div class="pet-item" "{% if not pet.available %}opacity: 0.5;{% endif %}">
+            <strong>{{ pet.name }}</strong> - {{ pet.species }} - ${{ pet.price }} 
+            {% if pet.available %}
+                <span class="available">Available</span>
+                <input type="radio" name="pet_id" value="{{ pet.id }}"> 
+            {% else %}
+                <span class="sold">Sold</span>
+            {% endif %}
+            <br>
+            <strong>Breed:</strong> {{ pet.breed }}<br>
+            <strong>Age:</strong> {{ pet.age }}<br>
+            <strong>Description:</strong> {{ pet.description }}<br>
+        </div>
+        
         {% endfor %}
         <button type="submit">Purchase</button>
     </form>
