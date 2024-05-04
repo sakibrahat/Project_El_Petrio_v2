@@ -159,14 +159,27 @@ def pet_buying_page(request):
 from django.shortcuts import render, redirect
 from .models import PetAdd
 
+# def buy_pet(request):
+#     pets = PetAdd.objects.filter(available=True)
+#     if request.method == 'POST':
+#         pet_id = request.POST.get('pet_id')
+#         pet = PetAdd.objects.get(id=pet_id)
+#         pet.available = False
+#         pet.save()
+#         return redirect('payment')
+#     return render(request, 'buy.html', {'pets': pets})
+
 def buy_pet(request):
-    pets = PetAdd.objects.filter(available=True)
     if request.method == 'POST':
         pet_id = request.POST.get('pet_id')
         pet = PetAdd.objects.get(id=pet_id)
-        pet.available = False
-        pet.save()
-        return redirect('payment')
+        pet.available = False  # Mark the pet as sold
+        pet.save()  # Save the changes to the database
+        return redirect('buy_pet')  # Redirect to refresh the page after purchase
+
+    # Fetch all pets
+    pets = PetAdd.objects.all()
+    
     return render(request, 'buy.html', {'pets': pets})
 
 def payment(request):
